@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModalMaster Plugin Demo</title>
+
+    <!-- SEO Meta -->
+    <meta name="description"
+        content="Demo of ModalMaster.js – a lightweight, stackable, and customizable jQuery modal plugin by Samcbdev.">
+    <meta name="keywords"
+        content="ModalMaster, jQuery modal plugin, custom modal, popup, AJAX modal, Samcbdev, UI overlay, scroll lock modal">
+    <meta name="author" content="Samcbdev">
+
+    <style>
+        body.modalOpen.stopScroll {
+            overflow: hidden;
+        }
+
+        .customModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modalContent {
+            position: relative;
+        }
+
+        .showModal {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>ModalMaster Plugin - Full Feature Demo</h2>
+
+    <!-- ✅ Basic Modal -->
+    <div class="customModal simpleModal" data-outside-close="true">
+        <div class="modalContent">
+            <p>Simple modal content</p>
+            <button data-close-modal>Close</button>
+        </div>
+    </div>
+    <button class="openModalTrigger" data-modal-target="simpleModal">Open Simple Modal</button>
+
+    <!-- ✅ Modal with Configuration -->
+    <div class="customModal profileEditModal" data-animation="fade" data-animation-speed="500"
+        data-outside-close="false" data-scroll-lock="true" data-esc-close="true" data-modal-stack="true">
+        <div class="modalContent">
+            <p>Profile editing modal</p>
+            <button data-close-modal>Close</button>
+        </div>
+    </div>
+    <button class="openModalTrigger" data-modal-target="profileEditModal">Open Profile Modal</button>
+
+    <!-- ✅ AJAX Modal -->
+    <div class="customModal ajaxExampleModal">
+        <div class="modalContent">
+            <div class="ajaxTarget">Loading content...</div>
+        </div>
+    </div>
+    <button onclick="ModalMaster.openAjax('ajaxExampleModal', 'ajax-sample.html')">Open AJAX Modal</button>
+
+    <!-- ✅ Programmatic Control -->
+    <button onclick="ModalMaster.open('simpleModal')">Programmatically Open Simple Modal</button>
+    <button onclick="ModalMaster.close('simpleModal')">Programmatically Close Simple Modal</button>
+
+    <!-- ✅ ESC and Outside Click -->
+    <div class="customModal escapeCloseModal" data-esc-close="true" data-outside-close="true">
+        <div class="modalContent">
+            <p>Press ESC or click outside to close this modal.</p>
+        </div>
+    </div>
+    <button class="openModalTrigger" data-modal-target="escapeCloseModal">Open ESC Modal</button>
+
+    <!-- ✅ Lifecycle Callbacks -->
+    <div class="customModal lifecycleModal">
+        <div class="modalContent">
+            <p>Lifecycle Hooks Example</p>
+            <button data-close-modal>Close</button>
+        </div>
+    </div>
+    <button class="openModalTrigger" data-modal-target="lifecycleModal">Open Lifecycle Modal</button>
+
+    <!-- jQuery + ModalMaster -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="ModalMaster.js"></script>
+
+    <script>
+        // ✅ Global Settings
+        ModalMaster.setGlobalConfig({
+            outsideClickClose: false,
+            scrollLock: true,
+            escToClose: false,
+            animation: false,
+            animationSpeed: 300,
+            zIndexBase: 1000
+        });
+
+        $('.simpleModal').on('modal:open', function () {
+            console.log('✅ modal:open event triggered');
+        });
+
+        $('.simpleModal').on('modal:close', function () {
+            console.log('✅ modal:close event triggered');
+            $('.profileEditModal').modalOpen();
+        });
+
+        $('.profileEditModal').on('modal:open', function () {
+            console.log('✅ modal:open event triggered');
+        });
+
+
+        // ✅ Lifecycle Callbacks
+        ModalMaster.registerCallbacks('lifecycleModal', {
+            beforeOpen: function ($modal) { console.log('[Lifecycle] beforeOpen'); },
+            onOpen: function ($modal) { console.log('[Lifecycle] onOpen'); },
+            beforeClose: function ($modal) { console.log('[Lifecycle] beforeClose'); },
+            onClose: function ($modal) { console.log('[Lifecycle] onClose'); },
+            onAjaxLoad: function ($modal) { console.log('[Lifecycle] AJAX loading...'); },
+            onAjaxSuccess: function ($modal) { console.log('[Lifecycle] AJAX success'); },
+            onAjaxError: function ($modal) { console.log('[Lifecycle] AJAX failed'); }
+        });
+    </script>
+
+</body>
+
+</html>
