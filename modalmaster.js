@@ -153,7 +153,9 @@
     $modal.trigger('modal:beforeOpen');
     ModalMaster.invokeCallback(modalClass, 'beforeOpen', $modal);
 
-    if (isStackable) {
+    if (isStackable && !ModalMaster.stack.includes($modal)) {
+      const zIndex = ModalMaster.config.zIndexBase + ModalMaster.stack.length;
+      $modal.css('z-index', zIndex);
       ModalMaster.stack.push($modal);
       $modal.trigger('modal:stacked');
     }
@@ -228,6 +230,13 @@
     }
 
     return $modal;
+  };
+
+  ModalMaster.closeAll = function () {
+    while (ModalMaster.stack.length > 0) {
+      const $top = ModalMaster.stack.pop();
+      $top.modalClose();
+    }
   };
 
   window.ModalMaster = ModalMaster;
