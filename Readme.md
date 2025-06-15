@@ -18,6 +18,31 @@ It supports multiple modals, scroll locking, animations, AJAX content loading, a
 
 ---
 
+# **Installation and Setup**
+
+To use ModalMasterJS, include the `modalmaster.js` file in your HTML,
+preferably before the closing **`</body>`** tag:
+
+```html 
+<script src="https://cdn.jsdelivr.net/gh/samcbdev/ModalMasterJS/modalmaster.js"></script>
+
+or 
+
+<script src="https://cdn.jsdelivr.net/npm/modalmasterjs/modalmaster.js"></script>
+```
+
+Or 
+
+```html 
+<script src="https://cdn.jsdelivr.net/gh/samcbdev/ModalMasterJS/modalmaster.min.js"></script>
+
+or 
+
+<script src="https://cdn.jsdelivr.net/npm/modalmasterjs/modalmaster.min.js"></script>
+```
+
+---
+
 ## 📁 HTML Structure
 
 ```html

@@ -1,0 +1,13 @@
+{
+  "name": "modalmasterjs",
+  "version": "1.0.0",
+  "description": "A simple and lightweight modal library",
+  "main": "modalmaster.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samcbdev/ModalMasterJS.git"
+  },
+  "keywords": ["modal", "javascript", "library"],
+  "author": "Your Name",
+  "license": "MIT"
+}
